@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Quiz - Quiz Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+
+    <header class="dashboard-header">
+        <h2>📝 Quiz Application</h2>
+        <a href="{{ url_for('dashboard') }}" class="logout-btn">Dashboard</a>
+    </header>
+
+    <main class="dashboard-container">
+        <section class="welcome-section">
+            <h1>🎯 Test Your Knowledge</h1>
+            <p>Select one answer for each question, then submit your quiz.</p>
+        </section>
+
+        {% if questions %}
+        <form class="quiz-form" method="POST" action="{{ url_for('quiz') }}">
+
+            {% for q in questions %}
+            <div class="quiz-question">
+                <h3>{{ loop.index }}. {{ q.question }}</h3>
+
+                <label class="quiz-option">
+                    <input type="radio" name="question_{{ q.id }}" value="A" required>
+                    A. {{ q.option_a }}
+                </label>
+
+                <label class="quiz-option">
+                    <input type="radio" name="question_{{ q.id }}" value="B">
+                    B. {{ q.option_b }}
+                </label>
+
+                <label class="quiz-option">
+                    <input type="radio" name="question_{{ q.id }}" value="C">
+                    C. {{ q.option_c }}
+                </label>
+
+                <label class="quiz-option">
+                    <input type="radio" name="question_{{ q.id }}" value="D">
+                    D. {{ q.option_d }}
+                </label>
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="action-btn">Submit Quiz</button>
+        </form>
+        {% else %}
+            <p class="empty-message">
+                No questions available. Please add questions before starting the quiz.
+            </p>
+            <div class="view-actions">
+                <a href="{{ url_for('add_question') }}" class="action-btn">Add Questions</a>
+            </div>
+        {% endif %}
+    </main>
+
+</body>
+</html>

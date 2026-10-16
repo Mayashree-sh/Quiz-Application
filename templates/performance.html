@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Performance</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+
+    <header class="dashboard-header">
+        <h2>📝 Quiz Application</h2>
+        <a href="{{ url_for('dashboard') }}" class="logout-btn">
+            Dashboard
+        </a>
+    </header>
+
+    <main class="dashboard-container">
+        <section class="welcome-section">
+            <h1>📊 Quiz Performance</h1>
+            <p>Track your quiz results and achievements.</p>
+        </section>
+
+        <section class="dashboard-cards">
+
+            <div class="dashboard-card">
+                <div class="card-icon">📝</div>
+                <h3>Total Quizzes</h3>
+                <p>You have completed</p>
+                <h2>{{ stats.total_quizzes }}</h2>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-icon">🏆</div>
+                <h3>Best Percentage</h3>
+                <p>Your highest percentage</p>
+                <h2>{{ "%.1f"|format(stats.best_percentage) }}%</h2>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-icon">📈</div>
+                <h3>Average Percentage</h3>
+                <p>Your average performance</p>
+                <h2>{{ "%.1f"|format(stats.average_percentage) }}%</h2>
+            </div>
+
+        </section>
+
+        <div class="view-actions">
+            <a href="{{ url_for('history') }}" class="action-btn">
+                View Quiz History
+            </a>
+            <a href="{{ url_for('dashboard') }}" class="action-btn">
+                Back to Dashboard
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>

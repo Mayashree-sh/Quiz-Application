@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='history.css') }}">
+</head>
+<body>
+
+    <header class="header">
+        <h1>📝 Quiz Application</h1>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    </header>
+
+    <main class="container">
+        <h2>📊 Quiz History</h2>
+        <p>View your previous quiz results.</p>
+
+        {% if results %}
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Student</th>
+                        <th>Score</th>
+                        <th>Total Questions</th>
+                        <th>Percentage</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result.id }}</td>
+                        <td>{{ result.student_name }}</td>
+                        <td>{{ result.score }}</td>
+                        <td>{{ result.total }}</td>
+                        <td>
+                            {% if result.total > 0 %}
+                                {{ "%.1f"|format(
+                                    result.score * 100 / result.total
+                                ) }}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        </td>
+                        <td>{{ result.quiz_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p class="empty-message">
+                No quiz results yet. Complete a quiz to see your history.
+            </p>
+        {% endif %}
+
+        <a class="button" href="{{ url_for('quiz') }}">Take Quiz Again</a>
+        <a class="button secondary"
+           href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </main>
+
+</body>
+</html>

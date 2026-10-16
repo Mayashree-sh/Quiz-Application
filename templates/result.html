@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+
+    <header class="dashboard-header">
+        <h2>📝 Quiz Application</h2>
+        <a href="{{ url_for('dashboard') }}" class="logout-btn">Dashboard</a>
+    </header>
+
+    <main class="dashboard-container">
+        <section class="welcome-section">
+            <h1>🏆 Quiz Completed!</h1>
+            <p>Here is your final result.</p>
+        </section>
+
+        <div class="result-card">
+            <h2>Your Score</h2>
+            <p class="score">{{ score }} / {{ total }}</p>
+
+            {% if total > 0 %}
+                <p class="percentage">
+                    Percentage: {{ "%.1f"|format(score * 100 / total) }}%
+                </p>
+            {% endif %}
+
+            {% if total > 0 and score == total %}
+                <p>Excellent! You answered every question correctly!</p>
+            {% elif score > 0 %}
+                <p>Good effort! Keep practicing to improve your score.</p>
+            {% else %}
+                <p>Keep learning and try again!</p>
+            {% endif %}
+
+            <div class="view-actions">
+                <a href="{{ url_for('quiz') }}" class="action-btn">Try Again</a>
+                <a href="{{ url_for('dashboard') }}" class="action-btn">Dashboard</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Questions - Quiz Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard-page">
+
+    <header class="dashboard-header">
+        <h2>📝 Quiz Application</h2>
+        <a href="{{ url_for('dashboard') }}" class="logout-btn">Dashboard</a>
+    </header>
+
+    <main class="dashboard-container">
+        <section class="welcome-section">
+            <h1>➕ Add a New Question</h1>
+            <p>Create a multiple-choice question for your quiz.</p>
+        </section>
+
+        <form class="question-form" method="POST" action="{{ url_for('add_question') }}">
+            <label for="question">Question</label>
+            <textarea id="question" name="question"
+                      placeholder="Enter your question" required></textarea>
+
+            <label for="option_a">Option A</label>
+            <input type="text" id="option_a" name="option_a"
+                   placeholder="Enter option A" required>
+
+            <label for="option_b">Option B</label>
+            <input type="text" id="option_b" name="option_b"
+                   placeholder="Enter option B" required>
+
+            <label for="option_c">Option C</label>
+            <input type="text" id="option_c" name="option_c"
+                   placeholder="Enter option C" required>
+
+            <label for="option_d">Option D</label>
+            <input type="text" id="option_d" name="option_d"
+                   placeholder="Enter option D" required>
+
+            <label for="correct_answer">Correct Answer</label>
+            <select id="correct_answer" name="correct_answer" required>
+                <option value="">Select the correct option</option>
+                <option value="A">Option A</option>
+                <option value="B">Option B</option>
+                <option value="C">Option C</option>
+                <option value="D">Option D</option>
+            </select>
+
+            <button type="submit" class="action-btn">Save Question</button>
+
+            {% if message %}
+                <p class="success-message">{{ message }}</p>
+            {% endif %}
+        </form>
+    </main>
+
+</body>
+</html>
