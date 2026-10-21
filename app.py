@@ -305,8 +305,10 @@ def delete_question(question_id):
     return redirect(url_for("view_questions"))
 
 
+# Create database tables when the application starts
+create_database()
 
-# Run the application
+
+# Run the application locally
 if __name__ == "__main__":
-    create_database()
     app.run(debug=True)
